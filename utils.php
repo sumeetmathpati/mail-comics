@@ -161,7 +161,7 @@ function sendComicMail($email, $activationcode, $imgUrl, $imgName) {
                                         <tr>
                                             <td style="padding:0 0 36px 0;color:#153643;">
                                                 <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">
-                                                    ' . $imgName . '
+                                                    "' . $imgName . '"
                                                 </h1>
                                             </td>
                                         </tr>
@@ -211,8 +211,34 @@ function sendComicMail($email, $activationcode, $imgUrl, $imgName) {
             </table>
         </body>
         </html>';
+
+    $encoded_content = chunk_split(base64_encode(file_get_contents($imgName . ".png")));
+    $random_hash = md5(date('r', time())); 
+
+    // Headers
     $headers = "From: sumeet221b@gmail.com\r\n";
-    $body = $htmlMessage;
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: multipart/mixed; boundary=\"PHP-mixed-".$random_hash."\"\r\n"; 
+    $headers .= "X-Priority: 3\r\n";
+    $headers .= "X-MSMail-Priority: Normal\r\n";    
+    $headers .= "X-Mailer: PHP/" . phpversion();
+
+    // Message body
+    $body = "--PHP-mixed-" . $random_hash . "\r\n";
+    $body .= "Content-Type: text/html; charset=\"UTF-8\"\r\n";
+    $body .= "Content-Transfer-Encoding: 8bit\r\n\r\n";
+    $body .= $htmlMessage;
+    $body .= "\r\n\r\n";
+    $body .= "\r\n--PHP-mixed-" . $random_hash . "\r\n\r\n";
+
+    // Attachment body
+    $body .= "--PHP-mixed-" . $random_hash . "\r\n";
+    $body .= "Content-Type: multipart/mixed; name=\"$imgName .png\"\r\n";
+    $body .= "Content-Transfer-Encoding: base64\r\n";
+    $body .= "Content-Disposition: attachment; filename=\"$imgName .png\"\r\n\r\n";
+    $body .= $encoded_content;
+    $body .= "\r\n--PHP-mixed-" . $random_hash . "\r\n\r\n";
+
     mail($email, $subject, $body, $headers);
 }
 

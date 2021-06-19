@@ -8,7 +8,7 @@ $imgJSON = getComicJson();
 $imgUrl = $imgJSON->img;
 $filename = $imgJSON->safe_title;
 $path = '.';
-$file = $path . "/" . $filename;
+$file = $path . "/" . $filename. ".png";
 file_put_contents($file,file_get_contents($imgUrl));
 
 while($row = mysqli_fetch_array($result)) {
