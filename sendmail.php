@@ -12,6 +12,6 @@ $file = $path . "/" . $filename;
 file_put_contents($file,file_get_contents($imgUrl));
 
 while($row = mysqli_fetch_array($result)) {
-    sendComicMail($row['email']);
+    sendComicMail($row['email'], $row['activationcode'], $imgUrl, $filename);
 }
 ?>

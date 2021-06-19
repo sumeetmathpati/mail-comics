@@ -113,7 +113,7 @@ function sendVerificationMail($email, $verificationCode) {
     mail($email,$subject,$messages,$headers);
 }
 
-function sendComicMail($email) {
+function sendComicMail($email, $activationcode, $imgUrl, $imgName) {
     $subject = 'New Comic from MailComics';
     $htmlMessage = '
         <!DOCTYPE html>
@@ -161,7 +161,7 @@ function sendComicMail($email) {
                                         <tr>
                                             <td style="padding:0 0 36px 0;color:#153643;">
                                                 <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">
-                                                    Heading
+                                                    ' . $imgName . '
                                                 </h1>
                                             </td>
                                         </tr>
@@ -173,19 +173,14 @@ function sendComicMail($email) {
                                                         <td style="width:260px;padding:0;vertical-align:top;color:#153643;">
                                                             <p
                                                                 style="margin:0 0 25px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
-                                                                <img src="./comic.png" alt="" width="100%" maxwidth="600px"
+                                                                <img src="' . $imgUrl . '" alt="" width="100%" maxwidth="600px"
                                                                     style="height:auto;display:block;
                                                                     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;" />
                                                             </p>
                                                             <p
                                                                 style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
                                                                 Lorem ipsum.</p>
-                                                            <p
-                                                                style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
-                                                                <a href="#"
-                                                                    style="color:#ee4c50;text-decoration:underline;">Some
-                                                                    link</a>
-                                                            </p>
+                                                            
                                                         </td>
                                                     </tr>
                                                 </table>
