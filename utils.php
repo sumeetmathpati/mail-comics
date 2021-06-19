@@ -112,4 +112,12 @@ function sendVerificationMail($email, $verificationCode) {
     
     mail($email,$subject,$messages,$headers);
 }
+
+function sendComicMail($email) {
+    $subject = 'New Comic from MailComics';
+    $htmlMessage = "Some email template.";
+    $headers = "From: no-reply@example.com\r\n";
+    $body = $htmlMessage;
+    mail($email, $subject, $body, $headers);
+}
 ?>
