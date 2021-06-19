@@ -11,7 +11,12 @@ $path = '.';
 $file = $path . "/" . $filename. ".png";
 file_put_contents($file,file_get_contents($imgUrl));
 
+// Send mail to all the emails in the db.
 while($row = mysqli_fetch_array($result)) {
     sendComicMail($row['email'], $row['activationcode'], $imgUrl, $filename);
 }
+
+// Delete the fetched image.
+unlink($file);
+
 ?>
