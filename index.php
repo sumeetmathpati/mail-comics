@@ -24,6 +24,7 @@ if(isset($_POST['submit'])) {
 
 		if ($query) {
 
+			sendVerificationMail($email, $activationcode);
 			echo "<script>alert('Registration successful!');</script>";
 			// echo "<script>window.location = 'index.php';</script>";
 			header("Location: " . (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://{$_SERVER['HTTP_HOST']}/php-sumeetmathpati/index.php", true, 301);
