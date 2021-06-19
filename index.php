@@ -2,6 +2,7 @@
 
 include_once("connection.php");
 include_once("utils.php");
+session_start();
 
 if(isset($_POST['submit'])) {
 
@@ -22,7 +23,10 @@ if(isset($_POST['submit'])) {
 		if ($query) {
 
 			sendVerificationMail($email, $activationcode);
-			echo "<script>alert('Registration successful!');</script>";
+
+			// echo "<script>alert('Registration successful!');</script>";
+			$_SESSION["message"] = "Registration successful!";
+
 			// echo "<script>window.location = 'index.php';</script>";
 			header("Location: " . (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://{$_SERVER['HTTP_HOST']}/php-sumeetmathpati/index.php", true, 301);
 		} else {
@@ -65,12 +69,14 @@ if(isset($_POST['submit'])) {
 
 	<?php
 		if (isset($message)) {
-			echo "<div class=\"w3-panel w3-pale-green w3-border\"> <p>$message</p> </div>";
+			echo "<div class=\"w3-panel w3-pale-green w3-border\"> <p> $message</p> </div>";
+		}
+		if (isset($_SESSION['message'])) {
+			echo "<div class=\"w3-panel w3-pale-green w3-border\"> <p>{$_SESSION['message']}</p> </div>";
 		}
 		if (isset($error)) {
 			echo "<div class=\"w3-panel w3-pale-red w3-border\"> <p>$error</p> </div>";	
 		}
-		
 	?>
 
 	<p>
