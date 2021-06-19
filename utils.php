@@ -221,7 +221,7 @@ function sendComicMail($email) {
     mail($email, $subject, $body, $headers);
 }
 
-function getImgUrl() {
+function getComicJson() {
     $url="https://c.xkcd.com/random/comic/";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
