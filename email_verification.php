@@ -42,7 +42,6 @@ if(!empty($_GET['code']) && isset($_GET['code'])) {
 
   <link href="./assets/vendor/css/bootstrap.min.css" rel="stylesheet">
 
-  <link href="./assets/css/index.css" rel="stylesheet">
 </head>
 
 <body class = "text-center">
