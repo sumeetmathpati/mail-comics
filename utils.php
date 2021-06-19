@@ -230,7 +230,11 @@ function getImgUrl() {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $a = curl_exec($ch); 
     $url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL); 
-    echo $url;
-    
+
+    // echo $url;
+    $comicNumber = parse_url($url);
+    $data = file_get_contents("https://xkcd.com" . $comicNumber['path'] ."info.0.json");
+    $decodedData = json_decode($data);
+    return $decodedData;
 }
 ?>
