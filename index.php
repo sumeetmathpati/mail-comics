@@ -5,8 +5,6 @@ include_once("utils.php");
 
 if(isset($_POST['submit'])) {
 
-	echo "<script>alert('H1');</script>";
-
 	$email = $_POST['email'];
 	// This application don't have to use passwords yet.
 	// $password=$_POST['password'];
@@ -19,8 +17,6 @@ if(isset($_POST['submit'])) {
 	// If user don't exist already.
 	if (mysqli_num_rows($sql) < 1) {
 		
-		echo "<script>alert('H2');</script>";
-
 		$query = mysqli_query($con, "INSERT INTO users(email, activationcode) VALUES('$email', '$activationcode')");
 
 		if ($query) {
@@ -41,7 +37,7 @@ if(isset($_POST['submit'])) {
 			sendVerificationMail($email, $activationcode);
 
 			// echo "<script>alert('You have already registered!');</script>";
-			$error = "You have already registered!";
+			$error = "You have already registered, please verify the email!";
 
 		} else {
 			
@@ -63,10 +59,23 @@ if(isset($_POST['submit'])) {
 	<h2>MailComics</h2>
 </div>
 
+
+
 <form class="w3-container" name="insert" action="" method="post">
+
+	<?php
+		if (isset($message)) {
+			echo "<div class=\"w3-panel w3-pale-green w3-border\"> <p>$message</p> </div>";
+		}
+		if (isset($error)) {
+			echo "<div class=\"w3-panel w3-pale-red w3-border\"> <p>$error</p> </div>";	
+		}
+		
+	?>
+
 	<p>
-		<label>Email</label>
-		<input type="email" name="email" id="email" class="w3-input" type="text">
+		<label class="w3-text-blue"><b>Email</b></label>
+		<input type="email" name="email" id="email" class="w3-input w3-border" type="text">
 		</p>
 		<!-- <p>
 		<label>Password</label>
