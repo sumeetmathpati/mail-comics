@@ -4,7 +4,7 @@ include 'connection.php';
 
 if (!empty($_GET['code']) && isset($_GET['code'])) {
 
-  $code=$_GET['code'];
+  $code = $_GET['code'];
 
   if (isset($_GET['unsub'])) {
     $sql=mysqli_query($con,"DELETE FROM users WHERE activationcode='$code' AND status = 1");

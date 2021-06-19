@@ -74,7 +74,7 @@ function sendVerificationMail($email, $verificationCode) {
                                                         </p>
                                                         <p
                                                             style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
-                                                            <a href="#"
+                                                            <a href="' . (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/php-sumeetmathpati/remove_email.php?code='.$verificationCode.'"
                                                                 style="color:#ee4c50;text-decoration:underline;"><br>No!
                                                                 This wan not me.</a>
                                                         </p>
