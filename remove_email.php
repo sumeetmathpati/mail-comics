@@ -4,23 +4,23 @@ include 'connection.php';
 
 if (!empty($_GET['code']) && isset($_GET['code'])) {
 
-  $code = $_GET['code'];
+	$code = $_GET['code'];
 
-  if (isset($_GET['unsub'])) {
-    $sql = mysqli_query($con,"DELETE FROM users WHERE activationcode='$code' AND status = 1");
-    if($sql) {
-      $msg = "You have been unsubscribed!";
-    } else {
-      $msg = "You havn't subscribed!";
-    }
-  } else {
-    $sql = mysqli_query($con,"DELETE FROM users WHERE activationcode='$code' AND status = 0");
-    if($sql) {
-      $msg = "Thank you!";
-    } else {
-      $msg = "Error";
-    }
-  }
+	if (isset($_GET['unsub'])) {
+		$sql = mysqli_query($con,"DELETE FROM users WHERE activationcode='$code' AND status = 1");
+		if($sql) {
+			$msg = "You have been unsubscribed!";
+		} else {
+			$msg = "You havn't subscribed!";
+		}
+	} else {
+		$sql = mysqli_query($con,"DELETE FROM users WHERE activationcode='$code' AND status = 0");
+		if($sql) {
+			$msg = "Thank you!";
+		} else {
+			$msg = "Error";
+		}
+	}
 }
 ?>
 
@@ -28,15 +28,15 @@ if (!empty($_GET['code']) && isset($_GET['code'])) {
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <title>Mail Comics</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<title>Mail Comics</title>
 </head>
 
 <body class="text-center">
-  <main class="form-signin">
-    <?php echo htmlentities($msg); ?>
-  </main>
+	<main class="form-signin">
+		<?php echo htmlentities($msg); ?>
+	</main>
 </body>
 </html>
