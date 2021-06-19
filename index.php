@@ -4,7 +4,9 @@ include_once("connection.php");
 
 if(isset($_POST['submit'])) {
 
-	$email=$_POST['email'];
+	echo "<script>alert('H1');</script>";
+
+	$email = $_POST['email'];
 	// This application don't have to use passwords yet.
 	// $password=$_POST['password'];
 	// $encrypted_password = password_hash($user_password, PASSWORD_DEFAULT);
@@ -16,16 +18,15 @@ if(isset($_POST['submit'])) {
 	// If user don't exist already.
 	if (mysqli_num_rows($sql) < 1) {
 		
-		$query=mysqli_query($con,
-		"INSERT INTO users(email, activationcode) 
-		VALUES('$email', '$activationcode')"
-		);
+		echo "<script>alert('H2');</script>";
+
+		$query = mysqli_query($con, "INSERT INTO users(email, activationcode) VALUES('$email', '$activationcode')");
 
 		if ($query) {
 
-			sendVerificationMail($email, $activationcode);
 			echo "<script>alert('Registration successful!');</script>";
-			echo "<script>window.location = 'index.php';</script>";
+			// echo "<script>window.location = 'index.php';</script>";
+			header("Location: " . (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://{$_SERVER['HTTP_HOST']}/php-sumeetmathpati/index.php", true, 301);
 		} else {
 
 			echo "<script>alert('Data not inserted');</script>";
