@@ -32,8 +32,6 @@ if (!empty($_GET['code']) && isset($_GET['code'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <title>Mail Comics</title>
-
-  <link href="./assets/vendor/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="text-center">
