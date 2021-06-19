@@ -5,7 +5,7 @@ function sendVerificationMail($email, $verificationCode) {
     $headers .= "MIME-Version: 1.0"."\r\n";
     $headers .= 'Content-type: text/html; charset=iso-8859-1'."\r\n";
     $headers .= 'From:MailComics'."\r\n";
-    $ms = '<!DOCTYPE html>
+    $messages = '<!DOCTYPE html>
     <html lang="en">
     
     <head>
@@ -111,6 +111,6 @@ function sendVerificationMail($email, $verificationCode) {
     
     </html>';
     
-    mail($to,$subject,$ms,$headers);
+    mail($email,$subject,$messages,$headers);
 }
 ?>
