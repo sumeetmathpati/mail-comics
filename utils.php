@@ -1,4 +1,6 @@
 <?php
+include_once("env.php");
+
 function sendVerificationMail($email, $verificationCode) {
 
     $subject="Verify Email";
@@ -60,7 +62,7 @@ function sendVerificationMail($email, $verificationCode) {
                                                                 style="color:#ee4c50;text-decoration:underline;">here</a>
                                                         </p>
                                                         <p>
-                                                            <a href="' . (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/php-sumeetmathpati/email_verification.php?code='.$verificationCode.'">
+                                                            <a href="' . (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . HOST . '/php-sumeetmathpati/email_verification.php?code='.$verificationCode.'">
                                                                 <button
                                                                     style="background-color: #ee4c50; color: white; padding: 8px 8px; border: 0;">Yes,
                                                                     Sign me up!</button>
@@ -74,7 +76,7 @@ function sendVerificationMail($email, $verificationCode) {
                                                         </p>
                                                         <p
                                                             style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
-                                                            <a href="' . (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/php-sumeetmathpati/remove_email.php?code='.$verificationCode.'"
+                                                            <a href="' . (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . HOST . '/php-sumeetmathpati/remove_email.php?code='.$verificationCode.'"
                                                                 style="color:#ee4c50;text-decoration:underline;"><br>No!
                                                                 This wan not me.</a>
                                                         </p>
@@ -148,7 +150,7 @@ function sendComicMail($email, $activationcode, $imgUrl, $imgName) {
                 <tr>
                     <td align="center" style="padding:0;">
                         <table role="presentation"
-                            style="width:602px;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;text-align:left;">
+                            style="min-width:400px;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;text-align:left;">
                             <tr>
                                 <td align="center" style="padding:24px 0 24px 0;background:#70bbd9;">
                                     <h1>MailComics</h1>
@@ -197,7 +199,7 @@ function sendComicMail($email, $activationcode, $imgUrl, $imgName) {
                                             <td style="padding:0;width:50%;" align="left">
                                                 <p
                                                     style="margin:0;font-size:14px;line-height:16px;font-family:Arial,sans-serif;color:#ffffff;">
-                                                    &reg; MailComics 2021<br /><a href="http://www.example.com"
+                                                    &reg; MailComics 2021<br /><a href="' . (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . HOST . '/php-sumeetmathpati/remove_email.php?code='.$activationcode.'&unsub=1"
                                                         style="color:#ffffff;text-decoration:underline;">Unsubscribe</a>
                                                 </p>
                                             </td>
