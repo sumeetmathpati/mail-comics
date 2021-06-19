@@ -7,7 +7,6 @@ function sendVerificationMail($email, $verificationCode) {
     $headers .= 'From:MailComics'."\r\n";
     $messages = '<!DOCTYPE html>
     <html lang="en">
-    
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -38,7 +37,7 @@ function sendVerificationMail($email, $verificationCode) {
             <tr>
                 <td align="center" style="padding:0;">
                     <table role="presentation"
-                        style="width:602px;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;text-align:left;">
+                        style="min-width:400px;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;text-align:left;">
                         <tr>
                             <td align="center" style="padding:24px 0 24px 0;background:#70bbd9;">
                                 <h1>MailComics</h1>
@@ -53,7 +52,7 @@ function sendVerificationMail($email, $verificationCode) {
                                             <table role="presentation"
                                                 style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">
                                                 <tr>
-                                                    <td style="width:260px;padding:0;vertical-align:top;color:#153643;">
+                                                    <td style="padding:0;vertical-align:top;color:#153643;">
                                                         <p
                                                             style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
                                                             This mail was sent to you because you signed up at <a href="#"
