@@ -7,14 +7,14 @@ if (!empty($_GET['code']) && isset($_GET['code'])) {
   $code = $_GET['code'];
 
   if (isset($_GET['unsub'])) {
-    $sql=mysqli_query($con,"DELETE FROM users WHERE activationcode='$code' AND status = 1");
+    $sql = mysqli_query($con,"DELETE FROM users WHERE activationcode='$code' AND status = 1");
     if($sql) {
       $msg = "You have been unsubscribed!";
     } else {
-      $msg = "You hevn't subscribed!";
+      $msg = "You havn't subscribed!";
     }
   } else {
-    $sql=mysqli_query($con,"DELETE FROM users WHERE activationcode='$code' AND status = 0");
+    $sql = mysqli_query($con,"DELETE FROM users WHERE activationcode='$code' AND status = 0");
     if($sql) {
       $msg = "Thank you!";
     } else {

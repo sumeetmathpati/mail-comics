@@ -2,7 +2,7 @@
 include_once("connection.php");
 include_once("utils.php");
 
-$result = mysqli_query($con, "SELECT email, activationcode FROM users");
+$result = mysqli_query($con, "SELECT email, activationcode FROM users WHERE status = 1");
 
 $imgJSON = getComicJson();
 $imgUrl = $imgJSON->img;
