@@ -23,11 +23,11 @@ if(isset($_POST['submit'])) {
 		if ($query) {
 
 			sendVerificationMail($email, $activationcode);
+			echo "<script>alert('Registration successful! Please verify the email using verification link sent to your registered email.');</script>";
 
-			echo "<script>alert('Registration successful!');</script>";
 
-			// echo "<script>window.location = 'index.php';</script>";
-			header("Location: " . (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://{$_SERVER['HTTP_HOST']}/index.php", true, 301);
+			echo "<script>window.location = 'index.php';</script>";
+			// header("Location: " . (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://{$_SERVER['HTTP_HOST']}/index.php", true, 301);
 		} else {
 
 			echo "<script>alert('Data not inserted');</script>";
@@ -74,6 +74,8 @@ if(isset($_POST['submit'])) {
 			echo "<div class=\"w3-panel w3-pale-red w3-border\"> <p>$error</p> </div>";	
 		}
 	?>
+
+	<p>Sign up here to recieve comics at every 5 minutes.</p>
 
 	<p>
 		<label class="w3-text-blue"><b>Email</b></label>
