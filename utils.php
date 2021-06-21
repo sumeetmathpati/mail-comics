@@ -57,7 +57,7 @@ function sendVerificationMail($email, $verificationCode) {
 													<td style="padding:0;vertical-align:top;color:#153643;">
 														<p
 															style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
-															This mail was sent to you because you signed up at <a href="#"
+															This mail was sent to you because you signed up at <a href="' . (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . HOST . '/index.php"
 															style="color:#ee4c50;text-decoration:underline;">MailComics.</a> Please verify your email by clicking <a href="' . (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/email_verification.php?code='.$verificationCode.'"
 																style="color:#ee4c50;text-decoration:underline;">here</a>
 														</p>
