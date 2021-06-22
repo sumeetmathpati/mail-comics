@@ -3,7 +3,7 @@
 include_once 'connection.php';
 include_once 'utils.php';
 
-if(isset($_POST['submit'])) {
+if( (isset($_POST['submit'])) && (isset($_POST['email'])) && (!filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL) === false) ) {
 
 	$email = $_POST['email'];
 	// This application don't have to use passwords yet.
