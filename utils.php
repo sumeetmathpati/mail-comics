@@ -253,8 +253,11 @@ function getComicJson() {
 
 	// echo $url;
 	$comicNumber = parse_url($url);
-	$data = file_get_contents("https://xkcd.com" . $comicNumber['path'] ."info.0.json");
-	$decodedData = json_decode($data);
-	return $decodedData;
+	if ($comicNumber) {
+		$data = file_get_contents("https://xkcd.com" . $comicNumber['path'] ."info.0.json");
+		$decodedData = json_decode($data);
+		return $decodedData;
+	}
+	return false;
 }
 ?>
