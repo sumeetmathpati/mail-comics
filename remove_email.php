@@ -2,25 +2,36 @@
 <?php
 include 'connection.php';
 
-if (!empty($_GET['code']) && isset($_GET['code'])) {
-
+if (!empty($_GET['code']) && isset($_GET['code']) && !filter_input(INPUT_GET, 'code', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES) === false) {
+		
 	$code = $_GET['code'];
 
-	if (isset($_GET['unsub'])) {
-		$sql = mysqli_query($con,"DELETE FROM users WHERE activationcode='$code' AND status = 1");
+	if (isset($_GET['unsub']) && (!filter_input(INPUT_GET, 'unsub', FILTER_SANITIZE_NUMBER_INT) === false)) {
+
+		$sql = $con->prepare('DELETE FROM users WHERE activationcode = ?');
+		$sql->bind_param('s',$code);
+		$sql->execute();
+		$sql->close();
+
 		if($sql) {
-			$msg = "You have been unsubscribed!";
+			$msg = 'You have been unsubscribed!';
 		} else {
-			$msg = "You havn't subscribed!";
+			$msg = 'You havn\'t subscribed!';
 		}
 	} else {
-		$sql = mysqli_query($con,"DELETE FROM users WHERE activationcode='$code' AND status = 0");
+
+		$sql = $con->prepare('DELETE FROM users WHERE activationcode = ? AND status = 0');
+		$sql->bind_param('s',$code);
+		$sql->execute();
+		$sql->close();
 		if($sql) {
-			$msg = "Thank you!";
+			$msg = 'Thank you!';
 		} else {
-			$msg = "Error";
+			$msg = 'Error';
 		}
 	}
+}  else {
+	$msg = 'You are at the wrong place!';
 }
 ?>
 

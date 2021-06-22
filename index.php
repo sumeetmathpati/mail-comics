@@ -1,8 +1,7 @@
 <?php
 
-include_once("connection.php");
-include_once("utils.php");
-session_start();
+include_once('connection.php');
+include_once('utils.php');
 
 if(isset($_POST['submit'])) {
 
@@ -12,25 +11,31 @@ if(isset($_POST['submit'])) {
 	// $encrypted_password = password_hash($user_password, PASSWORD_DEFAULT);
 	$activationcode=md5($email.time());
 
-	$sql = mysqli_query($con, "SELECT email, status, activationcode FROM users WHERE email='$email'");
-	$row = mysqli_fetch_array($sql);
+	$sql = $con->prepare('SELECT email, status, activationcode FROM users WHERE email = ?');
+	$sql->bind_param('s', $email); 
+	$sql->execute();
+	$result = $sql->get_result();
+	$row = $result->fetch_assoc();
 
 	// If user don't exist already.
-	if (mysqli_num_rows($sql) < 1) {
+	if ($row < 1) {
 		
-		$query = mysqli_query($con, "INSERT INTO users(email, activationcode) VALUES('$email', '$activationcode')");
+		$sql = $con->prepare('INSERT INTO users (email, activationcode) VALUES (?, ?)');
+		$sql->bind_param('ss', $email, $activationcode);
+		$result = $sql->execute();
+		$sql->close();
 
-		if ($query) {
+		if ($result) {
 
+			
 			sendVerificationMail($email, $activationcode);
-			echo "<script>alert('Registration successful! Please verify the email using verification link sent to your registered email.');</script>";
+			echo '<script>alert(\'Registration successful! Please verify the email using verification link sent to your registered email.\');</script>';
 
-
-			echo "<script>window.location = 'index.php';</script>";
+			echo '<script>window.location = \'index.php\';</script>';
 			// header("Location: " . (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . "://{$_SERVER['HTTP_HOST']}/index.php", true, 301);
 		} else {
 
-			echo "<script>alert('Data not inserted');</script>";
+			echo '<script>alert(\'Data not inserted\');</script>';
 		} 
 	} else {
 
@@ -40,12 +45,12 @@ if(isset($_POST['submit'])) {
 			sendVerificationMail($email, $activationcode);
 
 			// echo "<script>alert('You have already registered!');</script>";
-			$error = "You have already registered, please verify the email!";
+			$error = 'You have already registered, please verify the email!';
 
 		} else {
 			
 			// echo "<script>alert('User Already exists!');</script>";
-			$error = "User Already exists!";
+			$error = 'User Already exists!';
 		}	
 	} 
 }

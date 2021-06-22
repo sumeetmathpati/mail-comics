@@ -1,32 +1,44 @@
 <?php
+
 include 'connection.php';
 
-if(!empty($_GET['code']) && isset($_GET['code'])) {
 
+if(!empty($_GET['code']) && isset($_GET['code']) && (!filter_input(INPUT_GET, 'code', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES) === false)) {
+
+        
 	$code = $_GET['code'];
 
-	$sql = mysqli_query($con,"SELECT * FROM users WHERE activationcode='$code'");
-	$num = mysqli_fetch_array($sql);
+	$sql = $con->prepare('SELECT * FROM users WHERE activationcode = ?');
+	$sql->bind_param('s', $code); 
+	$sql->execute();
+	$result = $sql->get_result();
+	$sql->close();
 
-	if($num > 0) {
+	$num = $result->fetch_assoc();
 
-		$status = 0;
-		$result = mysqli_query($con,"SELECT id FROM users WHERE activationcode='$code' and status='$status'");
-		$result_array=mysqli_fetch_array($result);   
+	// If use is present with that activation code.
+	if ($num > 0) {
+		
+		$sql = $con->prepare('SELECT * FROM users WHERE status = 0 AND activationcode = ?');
+		$sql->bind_param('s', $code); 
+		$sql->execute();
+		$result = $sql->get_result();
+		$result_array = $result->fetch_assoc();
+		
+		// If account is not verified.
+		if ($result_array > 0)  {
 
-		if($result_array>0)  {
-
-			$status=1;
-			$result1=mysqli_query($con,"UPDATE users SET status='$status' WHERE activationcode='$code'");
-			$msg="Your account is activated. Sit back and enjoy comics every 5 minutes."; 
+			$sql = $con->prepare('UPDATE users SET status = 1 WHERE activationcode = ?');
+			$sql->bind_param('s', $code);
+			$sql->execute();
+			$sql->close();
+			$msg='Your account is activated. Sit back and enjoy comics every 5 minutes.'; 
 		} else {
-
-			$msg = "Your email is already verified.";
+			$msg = 'Your email is already verified.';
 		}
 	} else {
-
-		$msg = "Wrong activation code.";
-	}
+		$msg = 'Wrong activation code.';
+	} 
 }
 ?>
 

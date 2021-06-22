@@ -1,10 +1,10 @@
 <?php
-include_once("env.php");
+include_once('env.php');
 
 function sendVerificationMail($email, $verificationCode) {
 
-	$subject="Verify Email";
-	$headers .= "MIME-Version: 1.0"."\r\n";
+	$subject='Verify Email';
+	$headers .= 'MIME-Version: 1.0'."\r\n";
 	$headers .= 'Content-type: text/html; charset=iso-8859-1'."\r\n";
 	$headers .= 'From:MailComics'."\r\n";
 	$messages = '<!DOCTYPE html>
@@ -242,7 +242,7 @@ function sendComicMail($email, $activationcode, $imgUrl, $imgName) {
 }
 
 function getComicJson() {
-	$url="https://c.xkcd.com/random/comic/";
+	$url='https://c.xkcd.com/random/comic/';
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_HEADER, true);
@@ -254,7 +254,7 @@ function getComicJson() {
 	// echo $url;
 	$comicNumber = parse_url($url);
 	if ($comicNumber) {
-		$data = file_get_contents("https://xkcd.com" . $comicNumber['path'] ."info.0.json");
+		$data = file_get_contents('https://xkcd.com' . $comicNumber['path'] .'info.0.json');
 		$decodedData = json_decode($data);
 		return $decodedData;
 	}
