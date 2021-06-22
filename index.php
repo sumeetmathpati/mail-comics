@@ -1,7 +1,7 @@
 <?php
 
-include_once('connection.php');
-include_once('utils.php');
+include_once 'connection.php';
+include_once 'utils.php';
 
 if(isset($_POST['submit'])) {
 
