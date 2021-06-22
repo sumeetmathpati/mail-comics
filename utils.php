@@ -1,12 +1,12 @@
 <?php
-include_once('env.php');
+include_once 'env.php';
 
 function sendVerificationMail($email, $verificationCode) {
 
 	$subject='Verify Email';
-	$headers .= 'MIME-Version: 1.0'."\r\n";
-	$headers .= 'Content-type: text/html; charset=iso-8859-1'."\r\n";
-	$headers .= 'From:MailComics'."\r\n";
+	$headers = "MIME-Version: 1.0"."\r\n";
+	$headers .= "Content-type: text/html; charset=iso-8859-1"."\r\n";
+	$headers .= "From:MailComics"."\r\n";
 	$messages = '<!DOCTYPE html>
 	<html lang="en">
 	<head>

@@ -1,6 +1,6 @@
 <?php
-include_once('connection.php');
-include_once('utils.php');
+include_once 'connection.php';
+include_once 'utils.php' ;
 
 $sql = $con->prepare('SELECT email, activationcode FROM users WHERE status = 1');
 $sql->execute();

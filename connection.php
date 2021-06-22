@@ -1,5 +1,5 @@
 <?php
-	include_once('env.php');
+	include_once 'env.php';
 
 	$con = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 	
